@@ -94,7 +94,7 @@ namespace CoreWebApi
 
             app.UseCors("enableWholeSaleMngmnt");
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
