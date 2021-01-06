@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CoreMVC.Models;
+using IMEIManager;
 
 namespace CoreMVC.Controllers
 {
@@ -20,6 +21,9 @@ namespace CoreMVC.Controllers
 
         public IActionResult Index()
         {
+            IMEIValidator iMEIValidator = new IMEIValidator();
+            bool isValid = iMEIValidator.IsValid("2rfwf343");
+
             return View();
         }
 
