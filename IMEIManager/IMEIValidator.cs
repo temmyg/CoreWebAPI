@@ -8,5 +8,10 @@ namespace IMEIManager
         {
             return $"{imei[0..5]} not Valid";           
         }
+
+        public string DeviceActivatedTime(string imei)
+        {
+            return "11-09-2011";
+        }
     }
 }
