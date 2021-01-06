@@ -22,9 +22,12 @@ namespace CoreMVC.Controllers
         public IActionResult Index()
         {
             IMEIValidator iMEIValidator = new IMEIValidator();
-            bool isValid = iMEIValidator.IsValid("2rfwf343");
-
-            return View();
+            string isValidMessage = iMEIValidator.IsPrefixValid("aab4yafasf2032eaasdf92wr");
+            DeviceValidationError dve = new DeviceValidationError()
+            {
+                IsValidMessage = isValidMessage
+            };
+            return View(dve);
         }
 
         public IActionResult Privacy()

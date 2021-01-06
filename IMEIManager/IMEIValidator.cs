@@ -4,9 +4,9 @@ namespace IMEIManager
 {
     public class IMEIValidator
     {
-        public bool IsValid(string imei)
+        public string IsPrefixValid(string imei)
         {
-            return false;
+            return $"{imei[0..5]} not Valid";           
         }
     }
 }
