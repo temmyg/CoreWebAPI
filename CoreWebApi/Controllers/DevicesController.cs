@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CoreWebApi.Services;
 
 namespace CoreWebApi.Controllers
 {
@@ -19,8 +20,23 @@ namespace CoreWebApi.Controllers
         private readonly string deviceIMEI = "FASF92322";
         private const string deviceIdPrefix = "amtgin";
         public DevicesController(HostBuilderContext hostBuilderContext, IHostLifetime hostLifetime, IHostEnvironment hostEnvironment, 
-            IServiceProvider serviceProvider, IRepoService repoService, IEnumerable<FillingItem> fillingItems, IEnumerable<IBankAccount> bankAccounts)
+            IServiceProvider serviceProvider, IServiceScopeFactory serviceScopeFactory, IRepoService repoService, ScopedDisposable scoped, 
+            IEnumerable<FillingItem> fillingItems, IEnumerable<IBankAccount> bankAccounts)
         {
+            IServiceScope scopeInst1 = serviceScopeFactory.CreateScope();
+            IServiceProvider scopedProvider1 = scopeInst1.ServiceProvider;
+            var scopedDisposable1 = scopedProvider1.GetRequiredService<ScopedDisposable>();
+
+            IServiceScope scopeInst2 = serviceScopeFactory.CreateScope();
+            IServiceProvider scopedProvider2 = scopeInst2.ServiceProvider;
+            var scopedDisposable2 = scopedProvider2.GetRequiredService<ScopedDisposable>();
+
+            /*
+             * these two instances are different!!
+             * scoped instances same: False
+             */
+            Console.WriteLine($"scoped instances same: {scopedDisposable1 == scopedDisposable2}");
+            
             this.repoService = repoService;
             this.serviceProvider = serviceProvider;
             deviceIMEI = "fasdf23e3";

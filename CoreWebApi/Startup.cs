@@ -39,6 +39,10 @@ namespace CoreWebApi
                 options.LoginPath = navService.GetLoginPath();
             });
 
+            services.AddTransient<TransientDisposable>()
+                            .AddScoped<ScopedDisposable>()
+                            .AddSingleton<SingletonDisposable>();
+
             services.AddScoped<IRepoService>(sp => new RepoService());
             services.AddScoped<IBankAccount, PremiumBankAccount>();
             services.AddScoped<IBankAccount, PrestigiousBankAccount>();

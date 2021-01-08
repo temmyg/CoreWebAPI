@@ -7,6 +7,9 @@ namespace CoreWebApi.Services
 {
     public class TransientDisposable : IDisposable
     {
-        public void Dispose() => Console.WriteLine($"{nameof(TransientDisposable)}.Dispose()");
+        public void Dispose()
+        {
+            Console.WriteLine($"{nameof(TransientDisposable)}.Dispose()");
+        }
     }
 }

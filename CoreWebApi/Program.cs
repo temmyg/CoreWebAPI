@@ -22,14 +22,15 @@ namespace CoreWebApi
 
             //TransientDisposablesWithoutDispose();
 
-            //ExemplifyDisposableScoping(host.Services, "Scope 1");
+            //IHost host1 = CreateHostBuilder_1(args).Build();
+            //ExemplifyDisposableScoping(host1.Services, "Scope 1");
             //Console.WriteLine();
 
             //ExemplifyDisposableScoping(host.Services, "Scope 2");
             //Console.WriteLine();
 
             //Console.ReadLine();
-  
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -77,10 +78,21 @@ namespace CoreWebApi
             using IServiceScope serviceScope = services.CreateScope();
             IServiceProvider provider = serviceScope.ServiceProvider;
 
+            /*  TransientDisposable and ScopedDisposable not get disposed,
+             *  once this method ends, they are only disposed once root IServiceProvider
+             *  is disposed.
+             */
             _ = services.GetRequiredService<TransientDisposable>();
             _ = services.GetRequiredService<ScopedDisposable>();
             _ = services.GetRequiredService<SingletonDisposable>();
 
+            //IServiceScope scopeInst1 = serviceScopeFactory.CreateScope();
+            //provider = scopeInst1.ServiceProvider;
+
+            /*
+             * Scoped ServiceProvider, once IServiceScope disposed, 
+             * TransientDisposable and ScopedDisposable get disposed
+             */
             _ = provider.GetRequiredService<TransientDisposable>();
             _ = provider.GetRequiredService<ScopedDisposable>();
             _ = provider.GetRequiredService<SingletonDisposable>();
