@@ -24,7 +24,7 @@ namespace CoreWebApi
 
             //IHost host1 = CreateHostBuilder_1(args).Build();
             //ExemplifyDisposableScoping(host1.Services, "Scope 1");
-            //Console.WriteLine();
+            Console.WriteLine();
 
             //ExemplifyDisposableScoping(host.Services, "Scope 2");
             //Console.WriteLine();
